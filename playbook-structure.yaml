@@ -1,0 +1,30 @@
+--- # This si ansible plyabook sructure how it looks like
+- hosts: group
+  remote_user: ansible
+  become: yes
+  become_method: sudo
+  connection: ssh
+  gather_facts: no
+# All above parameters belong to list - hosts
+# [section vars or newlist]
+  vars:
+    myuser: apache
+# [section tasks or new list]
+  tasks: 
+# [section task name or newlist]
+  - name: Install Apache 
+    yum:
+      name: httpd
+      state: latest
+    notify: 
+      - startservice
+# [section handlers or new list]
+  handlers: 
+  - name: startservice
+    service:
+      name: httpd
+      state: restarted
+
+
+
+
